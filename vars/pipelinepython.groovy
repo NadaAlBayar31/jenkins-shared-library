@@ -3,18 +3,21 @@ def call() {
         agent any
 
         environment {
-            IMAGE_NAME = 'nadaalbayar31/python-app:v1'
+            XYZ = 'ITI ITI ITI'
+            IMAGE_NAME = 'nadaalbayar/jenkins-library'
         }
 
-        stages {
-            stage('Build Docker Image') {
-                steps {
-                    buildPythonApp(env.IMAGE_NAME)
-                }
+       stages {
+        stage('Build Java & Docker') {
+            steps {
+                echo 'Building Java app and Docker image...'
+                buildJavaApp(env.IMAGE_NAME)
             }
+        }
 
             stage('Push Docker Image') {
                 steps {
+                    echo 'Pushing Docker image to DockerHub'
                     pushDockerImage(env.IMAGE_NAME)
                 }
             }
